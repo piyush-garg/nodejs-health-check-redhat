@@ -9,7 +9,7 @@ osio {
     build app: app
   }
 
-  
+
 
   cd {
     def resources = processTemplate(params: [
@@ -32,9 +32,9 @@ osio {
     // """
 
     echo "-------------- deploy -----------------------------------"
-    deploy resources: resources, env: 'stage'
+    //deploy resources: resources, env: 'stage'
 
-    // deploy app: app, env: 'run', approval: 'manual'
+    deploy resources: resources, env: 'run', approval: 'manual'
     echo "---------------------------------------------------------"
   }
 }
