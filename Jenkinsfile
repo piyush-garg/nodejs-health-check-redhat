@@ -6,7 +6,7 @@ osio {
 
   ci {
     def app = processTemplate()
-    build app: app
+    build resources: resources
   }
 
 
