@@ -5,7 +5,7 @@ osio {
   config runtime: 'node'
 
   ci {
-    def app = processTemplate()
+    def resources = processTemplate()
     build resources: resources
   }
 
