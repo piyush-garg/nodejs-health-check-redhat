@@ -9,6 +9,8 @@ osio {
     build app: app
   }
 
+  
+
   cd {
     def resources = processTemplate(params: [
             release_version: "1.0.${env.BUILD_NUMBER}"
