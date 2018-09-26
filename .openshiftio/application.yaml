@@ -9,11 +9,11 @@ parameters:
   - name: SUFFIX_NAME
     description: The suffix name for the template objects
     displayName: Suffix name
-    value: master
+    value: ''
   - name: RELEASE_VERSION
     description: The release version number of application
     displayName: Release version
-    value: '1'
+    value: 2.0.0
   - name: SOURCE_REPOSITORY_URL
     description: The source URL for the application
     displayName: Source URL
@@ -35,14 +35,14 @@ objects:
     metadata:
       name: nodejs-health-check-redhat${SUFFIX_NAME}
       labels:
-          version: ${RELEASE_VERSION}
+        version: ${RELEASE_VERSION}
     spec: {}
   - apiVersion: v1
     kind: BuildConfig
     metadata:
       name: nodejs-health-check-redhat-s2i${SUFFIX_NAME}
       labels:
-          version: ${RELEASE_VERSION}
+        version: ${RELEASE_VERSION}
     spec:
       output:
         to:
@@ -60,9 +60,13 @@ objects:
         sourceStrategy:
           from:
             kind: DockerImage
-            name: 'bucharestgold/centos7-s2i-nodejs:10.x'
+            name: 'registry.access.redhat.com/rhoar-nodejs/nodejs-10:latest'
           incremental: true
-      triggers: []
+      triggers:
+        - github:
+            secret: '${GITHUB_WEBHOOK_SECRET}'
+          type: GitHub
+        - type: ConfigChange
     status:
       lastVersion: 0
   - apiVersion: v1
